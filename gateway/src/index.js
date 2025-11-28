@@ -21,6 +21,10 @@ app.get("/", (req, res) => {
   res.json({ message: "Flash Deal Gateway is running" });
 });
 
+app.get('/health', (req,res) => {
+  res.status(200).json({ message: "gateway service is Healthy" });
+});
+
 const startServer = async () => {
   app.listen(GATEWAY_PORT, () => {
     logger.info(`Gateway is running on port ${GATEWAY_PORT}`);
