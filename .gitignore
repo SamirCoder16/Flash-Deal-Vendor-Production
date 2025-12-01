@@ -6,3 +6,4 @@ dist
 .dockerignore
 logs
 *.log
+docker-compose.yml
