@@ -2,6 +2,8 @@ import "dotenv/config";
 import express from "express";
 import helmet from "helmet";
 import cors from "cors";
+import logger from "./utils/logger.js";
+import authRouter from "./routes/auth.routes.js";
 
 import { ENV } from "./lib/env.js";
 
@@ -21,13 +23,15 @@ app.get("/health", (req, res) => {
   res.send(`Service is Healthy`);
 });
 
-const startServer = () => {
+app.use('/auth/', authRouter); 
+
+const startServer = async () => {
   try {
     app.listen(PORT, "0.0.0.0", () => {
-      console.log(`Auth Service is running on port ${PORT}`);
+      logger.info(`Auth Service is running on port ${PORT}`);
     });
   } catch (error) {
-    console.error("Error starting server:", error);
+    logger.error("Error starting server:", error);
   }
 };
 
